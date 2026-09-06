@@ -49,18 +49,23 @@ export default async function Nav() {
           <div className="flex items-center h-full">
             <LocalizedClientLink
               href="/"
-              className="flex items-center"
+              className="inline-flex items-center gap-2"
               data-testid="nav-store-link"
               aria-label="EPIC Technology home"
             >
-              <Image
-                src="/epic/epic-technology-logo.svg"
-                width={200}
-                height={68}
-                className="h-12 w-auto"
-                alt="EPIC Technology"
-                priority
-              />
+              <span className="relative block h-12 w-[50px] shrink-0 overflow-hidden">
+                <Image
+                  src="/epic/epic-technology-logo.svg"
+                  width={140}
+                  height={48}
+                  className="h-12 w-auto max-w-none"
+                  alt=""
+                  priority
+                />
+              </span>
+              <span className="whitespace-nowrap text-[17px] font-bold tracking-[-0.04em] text-[#0b4f97]">
+                EPIC TECHNOLOGY
+              </span>
             </LocalizedClientLink>
           </div>
 
