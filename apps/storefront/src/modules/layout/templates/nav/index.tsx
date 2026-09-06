@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Suspense } from "react"
 
 import { listLocales } from "@lib/data/locales"
@@ -48,12 +49,18 @@ export default async function Nav() {
           <div className="flex items-center h-full">
             <LocalizedClientLink
               href="/"
-              className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
+              className="flex items-center"
               data-testid="nav-store-link"
+              aria-label="EPIC Technology home"
             >
-              <span className="epic-wordmark">
-                EPIC<span>TECHNOLOGY</span>
-              </span>
+              <Image
+                src="/epic/epic-technology-logo.svg"
+                width={200}
+                height={68}
+                className="h-12 w-auto"
+                alt="EPIC Technology"
+                priority
+              />
             </LocalizedClientLink>
           </div>
 
