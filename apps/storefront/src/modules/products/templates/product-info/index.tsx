@@ -19,7 +19,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           </LocalizedClientLink>
         )}
         <Heading
-          level="h2"
+          level="h1"
           className="text-3xl leading-10 text-ui-fg-base"
           data-testid="product-title"
         >
@@ -32,6 +32,25 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         >
           {product.description}
         </Text>
+        <p className="text-xs text-ui-fg-muted">
+          Concept configuration · illustrative demo price · no real payment
+        </p>
+        <dl className="epic-product-facts">
+          {[
+            ["lead_time", "Lead time"],
+            ["showroom_status", "Showroom"],
+            ["installation", "Installation"],
+            ["warranty", "Warranty"],
+          ].map(([key, label]) => {
+            const value = product.metadata?.[key]
+            return typeof value === "string" ? (
+              <div key={key}>
+                <dt>{label}</dt>
+                <dd>{value}</dd>
+              </div>
+            ) : null
+          })}
+        </dl>
       </div>
     </div>
   )

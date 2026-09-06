@@ -110,3 +110,477 @@
     @apply text-[32px] leading-[44px] font-semibold;
   }
 }
+
+/* EPIC's editorial storefront. Commerce controls keep their Medusa styles. */
+@layer base {
+  body {
+    color: #202d27;
+    background: #fff;
+  }
+  ::selection {
+    background: #c9d6ca;
+    color: #18261f;
+  }
+  a:focus-visible,
+  button:focus-visible {
+    outline: 2px solid #52705c;
+    outline-offset: 5px;
+  }
+}
+.epic-announcement {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  min-height: 32px;
+  padding: 7px 16px;
+  background: #23372c;
+  color: #f4f3ed;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-align: center;
+}
+.epic-announcement span {
+  opacity: 0.4;
+}
+.epic-wordmark {
+  display: flex;
+  flex-direction: column;
+  font-size: 32px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.065em;
+  color: inherit;
+}
+.epic-wordmark span {
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: 0.29em;
+  margin-top: 6px;
+}
+.epic-eyebrow {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  line-height: 1.5;
+}
+.epic-hero {
+  background: #eeeee7;
+  border-bottom: 1px solid #dcded5;
+}
+.epic-hero-grid {
+  display: grid;
+  grid-template-columns: 1.08fr 1fr;
+  gap: 5%;
+  align-items: center;
+  padding-top: 32px;
+  padding-bottom: 32px;
+}
+.epic-hero-copy {
+  padding: 38px 0 38px 18px;
+}
+.epic-hero h1 {
+  font-size: clamp(38px, 4.7vw, 70px);
+  line-height: 1.06;
+  letter-spacing: -0.055em;
+  font-weight: 500;
+  margin: 30px 0;
+}
+.epic-hero h1 span {
+  color: #647568;
+}
+.epic-hero-description {
+  max-width: 450px;
+  color: #5b655d;
+  font-size: 16px;
+  line-height: 1.8;
+}
+.epic-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 22px;
+  margin-top: 32px;
+}
+.epic-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 17px 23px;
+  background: #263d2e;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  transition: background 0.2s;
+}
+.epic-button:hover {
+  background: #3f5c48;
+}
+.epic-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 6px;
+}
+.epic-hero-note {
+  font-size: 10px;
+  color: #626c64;
+  margin-top: 44px;
+}
+.epic-hero-visual {
+  position: relative;
+  display: block;
+  align-self: stretch;
+  min-height: 510px;
+  overflow: hidden;
+  background: #dcded5;
+  border: 1px solid #d6d8cf;
+}
+.epic-visual-top {
+  position: absolute;
+  z-index: 1;
+  top: 24px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+}
+.epic-hero-robot {
+  height: 100%;
+  max-height: 590px;
+  width: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+.epic-visual-bottom {
+  position: absolute;
+  bottom: 44px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.epic-visual-bottom h2 {
+  font-size: 20px;
+  letter-spacing: -0.03em;
+  margin-top: 8px;
+}
+.epic-circle-arrow {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border: 1px solid #98a294;
+  border-radius: 50%;
+}
+.epic-image-caption {
+  position: absolute;
+  bottom: 16px;
+  left: 24px;
+  font-size: 8px;
+  color: #536051;
+}
+.epic-solutions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  padding-top: 38px;
+  padding-bottom: 38px;
+}
+.epic-solution {
+  padding: 8px 24px;
+  border-right: 1px solid #e2e5de;
+}
+.epic-solution:first-child {
+  padding-left: 18px;
+}
+.epic-solution:last-child {
+  border-right: 0;
+}
+.epic-solution .epic-eyebrow {
+  color: #778274;
+  font-size: 9px;
+}
+.epic-solution h2 {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-size: 15px;
+  font-weight: 500;
+  margin: 15px 0 10px;
+}
+.epic-solution p {
+  font-size: 12px;
+  line-height: 1.7;
+  color: #677166;
+  max-width: 240px;
+}
+.epic-solution:hover h2 {
+  color: #57704f;
+}
+.epic-collection {
+  border-top: 1px solid #e5e7df;
+  background: #fafbf8;
+}
+.epic-product-card {
+  display: block;
+}
+.epic-product-card img {
+  transition: transform 0.4s;
+}
+.epic-product-card:hover img {
+  transform: scale(1.035);
+}
+.epic-services {
+  background: #e9ede5;
+  padding: 80px 0;
+}
+.epic-services-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12%;
+  padding-left: 42px;
+  padding-right: 42px;
+}
+.epic-services h2 {
+  font-size: clamp(30px, 3.5vw, 48px);
+  line-height: 1.1;
+  letter-spacing: -0.045em;
+  margin: 24px 0;
+}
+.epic-services p:not(.epic-eyebrow) {
+  max-width: 450px;
+  font-size: 14px;
+  color: #626e60;
+  line-height: 1.8;
+}
+.epic-services .epic-text-link {
+  margin-top: 28px;
+}
+.epic-service-steps {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.epic-service-steps li {
+  display: flex;
+  gap: 24px;
+  padding: 24px 0;
+  border-bottom: 1px solid #cdd5c7;
+}
+.epic-service-steps li:first-child {
+  padding-top: 0;
+}
+.epic-service-steps li > span {
+  font-size: 11px;
+  color: #65735d;
+  padding-top: 4px;
+}
+.epic-service-steps h3 {
+  font-size: 18px;
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+.epic-footer {
+  background: #1f2b25;
+  color: #f2f3ed;
+}
+.epic-footer-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 40px;
+  padding: 64px 18px;
+}
+.epic-footer h2 {
+  font-size: 11px;
+  margin-bottom: 20px;
+}
+.epic-footer li {
+  margin-top: 12px;
+  color: #b2bdb3;
+  font-size: 12px;
+}
+.epic-footer a:hover {
+  color: #dce8d6;
+}
+.epic-footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 24px 18px;
+  border-top: 1px solid #3a443d;
+  color: #aeb8b0;
+  font-size: 10px;
+}
+.epic-footer-bottom a {
+  text-decoration: underline;
+}
+.epic-page-intro {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
+.epic-page-intro h1 {
+  font-size: clamp(34px, 5vw, 64px);
+  line-height: 1.1;
+  letter-spacing: -0.05em;
+  margin: 24px 0;
+}
+.epic-page-intro > p:not(.epic-eyebrow) {
+  max-width: 650px;
+  font-size: 17px;
+  line-height: 1.8;
+  color: #626d63;
+}
+.epic-page-intro .epic-button {
+  margin-top: 28px;
+}
+.epic-info-panel {
+  padding: 32px;
+  border: 1px solid #dce2d7;
+  background: #f7f8f3;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.epic-policy-copy h2 {
+  font-size: 22px;
+  margin: 32px 0 12px;
+}
+.epic-policy-copy p {
+  color: #626d63;
+  line-height: 1.8;
+  font-size: 15px;
+}
+.epic-checkout-notice {
+  padding: 14px 24px;
+  background: #edf1e9;
+  text-align: center;
+  color: #42543d;
+  font-size: 12px;
+}
+.epic-product-facts {
+  border-top: 1px solid #e1e5dc;
+  margin-top: 20px;
+  font-size: 12px;
+}
+.epic-product-facts > div {
+  display: grid;
+  grid-template-columns: 105px 1fr;
+  gap: 15px;
+  border-bottom: 1px solid #e1e5dc;
+  padding: 13px 0;
+  line-height: 1.6;
+}
+.epic-product-facts dt {
+  color: #68765f;
+}
+@media (min-width: 1440px) {
+  .content-container {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+@media (max-width: 1023px) {
+  .epic-hero-grid {
+    gap: 24px;
+  }
+  .epic-hero-copy {
+    padding-left: 0;
+  }
+  .epic-hero-visual {
+    min-height: 450px;
+  }
+  .epic-solutions {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px 0;
+  }
+  .epic-solution:nth-child(2) {
+    border-right: 0;
+  }
+  .epic-solution:nth-child(3) {
+    padding-left: 18px;
+  }
+}
+@media (max-width: 639px) {
+  .epic-announcement {
+    font-size: 8px;
+    gap: 8px;
+    letter-spacing: 0.02em;
+  }
+  .epic-wordmark {
+    font-size: 27px;
+  }
+  .epic-wordmark span {
+    font-size: 7px;
+  }
+  .epic-hero-grid {
+    grid-template-columns: 1fr;
+    padding-top: 16px;
+  }
+  .epic-hero-copy {
+    padding: 24px 0 10px;
+  }
+  .epic-hero h1 {
+    font-size: 44px;
+  }
+  .epic-hero-description {
+    font-size: 14px;
+  }
+  .epic-hero-note {
+    margin-top: 24px;
+  }
+  .epic-hero-visual {
+    min-height: 0;
+    height: 400px;
+  }
+  .epic-solutions {
+    padding-top: 28px;
+    padding-bottom: 28px;
+  }
+  .epic-solution {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+  .epic-solution:first-child,
+  .epic-solution:nth-child(3) {
+    padding-left: 0;
+  }
+  .epic-solution h2 {
+    font-size: 13px;
+  }
+  .epic-solution p {
+    font-size: 11px;
+  }
+  .epic-services {
+    padding: 48px 0;
+  }
+  .epic-services-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .epic-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    padding: 48px 0;
+  }
+  .epic-footer-grid > div:first-child {
+    grid-column: 1 / -1;
+  }
+  .epic-footer-bottom {
+    flex-direction: column;
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .epic-product-card img {
+    transition: none;
+  }
+}

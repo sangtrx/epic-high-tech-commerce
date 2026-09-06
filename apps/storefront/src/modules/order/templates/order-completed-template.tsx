@@ -34,8 +34,11 @@ export default async function OrderCompletedTemplate({
             className="flex flex-col gap-y-3 text-ui-fg-base text-3xl mb-4"
           >
             <span>Thank you!</span>
-            <span>Your order was placed successfully.</span>
+            <span>Your demo order was placed successfully.</span>
           </Heading>
+          <p className="epic-checkout-notice">
+            Demo record only. No payment collected and no delivery arranged.
+          </p>
           <OrderDetails order={order} />
           <Heading level="h2" className="flex flex-row text-3xl-regular">
             Summary

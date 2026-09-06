@@ -185,7 +185,7 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         size="large"
         data-testid="submit-order-button"
       >
-        Place order
+        Place demo order
       </Button>
       <ErrorMessage
         error={errorMessage}

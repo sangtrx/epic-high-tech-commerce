@@ -17,12 +17,32 @@ export default async function Nav() {
 
   return (
     <div className="sticky top-0 inset-x-0 z-50 group">
-      <header className="relative h-16 mx-auto border-b duration-200 bg-white border-ui-border-base">
+      <div className="epic-announcement">
+        SEPTEMBER 7 SHOWCASE <span aria-hidden="true">/</span> Demo catalog &
+        checkout · No real payments
+      </div>
+      <header className="relative h-20 mx-auto border-b duration-200 bg-white border-ui-border-base">
         <nav className="content-container txt-xsmall-plus text-ui-fg-subtle flex items-center justify-between w-full h-full text-small-regular">
           <div className="flex-1 basis-0 h-full flex items-center">
             <div className="h-full">
-              <SideMenu regions={regions} locales={locales} currentLocale={currentLocale} />
+              <SideMenu
+                regions={regions}
+                locales={locales}
+                currentLocale={currentLocale}
+              />
             </div>
+            <LocalizedClientLink
+              href="/store"
+              className="hidden small:block ml-8"
+            >
+              Technology
+            </LocalizedClientLink>
+            <LocalizedClientLink
+              href="/showroom"
+              className="hidden medium:block ml-6"
+            >
+              Showroom & service
+            </LocalizedClientLink>
           </div>
 
           <div className="flex items-center h-full">
@@ -31,7 +51,9 @@ export default async function Nav() {
               className="txt-compact-xlarge-plus hover:text-ui-fg-base uppercase"
               data-testid="nav-store-link"
             >
-              Medusa Store
+              <span className="epic-wordmark">
+                EPIC<span>TECHNOLOGY</span>
+              </span>
             </LocalizedClientLink>
           </div>
 

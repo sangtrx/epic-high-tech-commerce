@@ -1,158 +1,85 @@
-<p align="center">
-  <a href="https://www.medusajs.com">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://user-images.githubusercontent.com/59018053/229103275-b5e482bb-4601-46e6-8142-244f531cebdb.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    <img alt="Medusa logo" src="https://user-images.githubusercontent.com/59018053/229103726-e5b529a3-9b3f-4970-8a1f-c6af37f087bf.svg">
-    </picture>
-  </a>
-</p>
-<h1 align="center">
-  Medusa DTC Starter
-</h1>
+# EPIC Technology · September 7 demo
 
-<h4 align="center">
-  <a href="https://docs.medusajs.com">Documentation</a> |
-  <a href="https://www.medusajs.com">Website</a>
-</h4>
+A Vietnam high-tech distribution and showroom demo built on the real [Medusa DTC Starter](https://github.com/medusajs/dtc-starter). Next.js storefront, Medusa backend and Admin, inventory, cart, checkout, accounts and orders remain the starter's commerce architecture.
 
-<p align="center">
-  Building blocks for digital commerce
-</p>
-<p align="center">
-  <a href="https://github.com/medusajs/medusa/blob/develop/LICENSE">
-    <img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="Medusa is released under the MIT license." />
-  </a>
-  <a href="https://circleci.com/gh/medusajs/medusa">
-    <img src="https://circleci.com/gh/medusajs/medusa.svg?style=shield" alt="Current CircleCI build status." />
-  </a>
-  <a href="https://github.com/medusajs/medusa/blob/develop/CONTRIBUTING.md">
-    <img src="https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat" alt="PRs welcome!" />
-  </a>
-    <a href="https://www.producthunt.com/posts/medusa"><img src="https://img.shields.io/badge/Product%20Hunt-%231%20Product%20of%20the%20Day-%23DA552E" alt="Product Hunt"></a>
-  <a href="https://discord.gg/xpCwq3Kfn8">
-    <img src="https://img.shields.io/badge/chat-on%20discord-7289DA.svg" alt="Discord Chat" />
-  </a>
-  <a href="https://twitter.com/intent/follow?screen_name=medusajs">
-    <img src="https://img.shields.io/twitter/follow/medusajs.svg?label=Follow%20@medusajs" alt="Follow @medusajs" />
-  </a>
-</p>
+This fork is **demonstration software**. Products are fictional configurations, prices and inventory are illustrative, and the Vietnam region uses Medusa's manual test payment provider. No supplier agreements, real stock, confirmed showroom appointments, payments or production settlement are represented.
 
-# Medusa DTC Starter
+## Demo catalog
 
-A production-ready monorepo starter for direct-to-consumer ecommerce stores powered by Medusa and Next.js. Includes a fully featured storefront with product browsing, cart, checkout, customer accounts, and order management.
+| Product | Application | Illustrative price |
+| --- | --- | ---: |
+| Serve One Delivery Robot | Hospitality and indoor service robotics | 185,000,000 VND |
+| Teach One Learning Robot | Teaching and classroom robotics | 68,000,000 VND |
+| STEM Lab Explorer Kit | Project-based electronics and robotics | 24,500,000 VND |
+| Vision Edge Inspection System | Sample-based industrial AI inspection | 96,000,000 VND |
 
-## Features
+Each product has a buyable demo variant, category, collection, inventory and metadata for lead time, showroom status, installation, warranty, support and configuration. Values are in **whole Vietnamese đồng**, Medusa's major currency unit, with no cents conversion. Original SVG concept illustrations are bundled locally in `apps/storefront/public/epic`; final hardware is not represented by these drawings.
 
-- All of [Medusa's commerce features](https://docs.medusajs.com/resources/commerce-modules)
-- Multi-region support with automatic country detection
-- Product catalog with variant selection
-- Cart with promotion codes
-- Multi-step checkout with shipping and payment
-- Customer accounts with order history and address management
-- Order transfer between accounts
+## Local run
 
-## Getting Started
+Requires Node 20.19+ or 22.12+, pnpm 10.11.1 and a **fresh, dedicated PostgreSQL 15+ demo database**. Do not point the demo seed at an existing business database. No paid services or Stripe account are needed.
 
-### Deploy with Medusa Cloud
-
-The fastest way to get started is deploying with [Medusa Cloud](https://cloud.medusajs.com):
-
-1. [Create a Medusa Cloud account](https://cloud.medusajs.com)
-2. Deploy this starter directly from your dashboard
-
-### Local Installation
-
-> **Prerequisites:
->
-> - [Node.js](https://nodejs.org/) v20+
-> - [PostgreSQL](https://www.postgresql.org/) v15+
-> - [pnpm](https://pnpm.io/) v10+
-
-1. Clone the repository and install dependencies:
-
-```bash
-git clone https://github.com/medusajs/dtc-starter.git
-cd dtc-starter
-pnpm install
+```sh
+git clone https://github.com/sangtrx/epic-high-tech-commerce.git
+cd epic-high-tech-commerce
+corepack pnpm install --frozen-lockfile
 ```
 
-2. Set up environment variables for the backend:
+1. Configure the backend locally using the variables below. Keep local configuration untracked and never commit credentials.
+2. Run `corepack pnpm --filter @dtc/backend exec medusa db:migrate`. On a fresh database this automatically runs `src/migration-scripts/initial-data-seed.ts`, creating the EPIC catalog, Vietnam/VND region, manual payment, demo inventory and shipping. **Do not seed again after a successful migration.** Migration records prevent repeat execution. The explicit `corepack pnpm backend:seed` command is only for an empty catalog whose initial data migration was deliberately skipped; it refuses to overwrite products. A failed partial initialization should be investigated or retried on another fresh demo database, not run over a live catalog.
+3. Create a local Admin user with `corepack pnpm --filter @dtc/backend exec medusa user --email admin@example.test --password '<your-local-demo-password>'`.
+4. Start the backend: `corepack pnpm --filter @dtc/backend exec medusa develop --host 127.0.0.1`.
+5. In Admin at `http://localhost:9000/app`, retrieve the **EPIC Demo Storefront** publishable API key from Settings → Publishable API Keys. Set it in the storefront's local configuration; do not use an admin token.
+6. Start the storefront: `corepack pnpm --filter @dtc/storefront exec next dev --turbopack --hostname 127.0.0.1 -p 8000`.
 
-```bash
-cp apps/backend/.env.template apps/backend/.env
+Backend local configuration (`apps/backend/.env`, created by the operator):
+
+| Variable | Local value / purpose |
+| --- | --- |
+| `DATABASE_URL` | Connection URL for your fresh demo PostgreSQL database |
+| `JWT_SECRET`, `COOKIE_SECRET` | Locally generated random values |
+| `STORE_CORS` | `http://localhost:8000` |
+| `ADMIN_CORS` | `http://localhost:9000` |
+| `AUTH_CORS` | `http://localhost:8000,http://localhost:9000` |
+| `EPIC_STOREFRONT_URL` | `http://localhost:8000`; absolute image URL stored at seed time, also usable by Admin |
+
+Storefront local configuration (`apps/storefront/.env.local`, created by the operator):
+
+| Variable | Local value / purpose |
+| --- | --- |
+| `NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY` | The EPIC storefront publishable key from the demo backend |
+| `NEXT_PUBLIC_MEDUSA_BACKEND_URL` | `http://localhost:9000` |
+| `NEXT_PUBLIC_BASE_URL` | `http://localhost:8000` |
+| `NEXT_PUBLIC_DEFAULT_REGION` | `vn` |
+
+Leave optional Stripe/payment integration keys unset. The seeded Vietnam region exposes only `pp_system_default`.
+
+## Walkthrough and URLs
+
+- Storefront: `http://localhost:8000/vn`
+- Catalog: `http://localhost:8000/vn/store`
+- Product: `http://localhost:8000/vn/products/serve-one`
+- Showroom and installation/support approach: `http://localhost:8000/vn/showroom`
+- Demo terms: `http://localhost:8000/vn/demo-information`
+- Cart: `http://localhost:8000/vn/cart`
+- Account and order history: `http://localhost:8000/vn/account`
+- Backend: `http://localhost:9000`; health: `/health`; Admin: `/app`
+
+Open a product, add its Demo package to the cart and proceed through the existing Medusa checkout with fictional contact/address details in Vietnam. Choose a demo delivery option and **Demo payment · no charge**, then **Place demo order**. The resulting order is a real database record for the demonstration; it does not trigger real payment or delivery. Review it in Admin or the account's order history. Shipping is illustrative and does not include a commitment to free installation or transport.
+
+## Checks
+
+```sh
+corepack pnpm --filter @dtc/backend lint
+corepack pnpm --filter @dtc/backend exec tsc --noEmit
+corepack pnpm --filter @dtc/backend build
+corepack pnpm --filter @dtc/storefront lint
+corepack pnpm --filter @dtc/storefront exec tsc --noEmit --incremental false
+corepack pnpm --filter @dtc/storefront build
 ```
 
-3. Set the database URL in `apps/backend.env`:
+The storefront build requires a reachable, seeded backend and its publishable key because the starter discovers category, collection and product routes during page generation. Typechecking is run explicitly: upstream Next.js configuration skips type/lint checks inside `next build`. Do not treat an offline build failure as a successful full build.
 
-```bash
-# Replace with actual database URL, make sure the database exists.
-DATABASE_URL=postgres://postgres:@localhost:5432/medusa-dtc-starter
-```
+## Upstream attribution
 
-4. Run migrations:
-
-```bash
-cd apps/backend
-pnpm medusa db:migrate
-```
-
-5. Add admin user:
-
-```bash
-cd apps/backend
-pnpm medusa user -e admin@test.com -p supersecret
-```
-
-6. Start Medusa backend:
-
-```bash
-cd apps/backend
-pnpm dev
-```
-
-7. Open the admin dashboard at `localhost:9000/app` and log in. Retrieve your publishable API key at Settings > Publishable API key.
-
-8. Set up environment variables for the storefront:
-
-```bash
-cp apps/storefront/.env.template apps/storefront/.env.local
-```
-
-9. Update `apps/storefront/.env.local` with your Medusa publishable API key:
-
-```bash
-NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=pk_6c3...
-```
-
-10.  Start storefront:
-
-```bash
-cd apps/storefront
-pnpm dev
-```
-
-The storefront runs on `http://localhost:8000`.
-
-You can slo run the following command from the root to start both backend and storefront:
-
-```bash
-pnpm dev
-```
-
-## Configuration
-
-The storefront is configured via environment variables in `apps/storefront/.env.local`:
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY` | Publishable API key from your Medusa backend | — |
-| `NEXT_PUBLIC_MEDUSA_BACKEND_URL` | URL of your Medusa backend | `http://localhost:9000` |
-| `NEXT_PUBLIC_DEFAULT_REGION` | Default region country code | `dk` |
-| `NEXT_PUBLIC_BASE_URL` | Base URL of the storefront | `https://localhost:8000` |
-| `NEXT_PUBLIC_STRIPE_KEY` | Stripe publishable key (optional) | — |
-
-## Resources
-
-- [Medusa Documentation](https://docs.medusajs.com)
-- [Medusa Cloud](https://cloud.medusajs.com)
+Forked from [`medusajs/dtc-starter`](https://github.com/medusajs/dtc-starter), verified at upstream commit `19e8a6fbefea5a385e9502409908bfbebbecf526` for this demo. The original [MIT LICENSE](LICENSE), copyright and package author credits are retained. Medusa and Next.js provide the commerce platform and storefront foundation. EPIC branding, demo catalog and concept illustrations are additions to this fork.

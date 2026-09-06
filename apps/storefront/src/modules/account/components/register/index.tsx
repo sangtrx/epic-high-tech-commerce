@@ -21,11 +21,10 @@ const Register = ({ setCurrentView }: Props) => {
       data-testid="register-page"
     >
       <h1 className="text-large-semi uppercase mb-6">
-        Become a Medusa Store Member
+        Create your EPIC account
       </h1>
       <p className="text-center text-base-regular text-ui-fg-base mb-4">
-        Create your Medusa Store Member profile, and get access to an enhanced
-        shopping experience.
+        Keep your demo orders and saved addresses in one place.
       </p>
       {message?.state === "verification_required" && (
         <div
@@ -81,19 +80,13 @@ const Register = ({ setCurrentView }: Props) => {
           data-testid="register-error"
         />
         <span className="text-center text-ui-fg-base text-small-regular mt-6">
-          By creating an account, you agree to Medusa Store&apos;s{" "}
-          <LocalizedClientLink
-            href="/content/privacy-policy"
-            className="underline"
-          >
-            Privacy Policy
+          Use fictional details for this demo account. Review our{" "}
+          <LocalizedClientLink href="/demo-information" className="underline">
+            Demo information
           </LocalizedClientLink>{" "}
           and{" "}
-          <LocalizedClientLink
-            href="/content/terms-of-use"
-            className="underline"
-          >
-            Terms of Use
+          <LocalizedClientLink href="/demo-information" className="underline">
+            Demo terms
           </LocalizedClientLink>
           .
         </span>

@@ -14,7 +14,8 @@ import { Locale } from "@lib/data/locales"
 
 const SideMenuItems = {
   Home: "/",
-  Store: "/store",
+  Technology: "/store",
+  "Showroom & services": "/showroom",
   Account: "/account",
   Cart: "/cart",
 }
@@ -68,7 +69,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                     className="flex flex-col h-full bg-[rgba(3,7,18,0.5)] rounded-rounded justify-between p-6"
                   >
                     <div className="flex justify-end" id="xmark">
-                      <button data-testid="close-menu-button" onClick={close}>
+                      <button aria-label="Close menu" data-testid="close-menu-button" onClick={close}>
                         <XMark />
                       </button>
                     </div>
@@ -127,7 +128,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         />
                       </div>
                       <Text className="flex justify-between txt-compact-small">
-                        © {new Date().getFullYear()} Medusa Store. All rights
+                        © {new Date().getFullYear()} EPIC Technology. All rights
                         reserved.
                       </Text>
                     </div>

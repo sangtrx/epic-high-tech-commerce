@@ -29,7 +29,7 @@ const StoreTemplate = ({
       <RefinementList sortBy={sort} />
       <div className="w-full">
         <div className="mb-8 text-2xl-semi">
-          <h1 data-testid="store-page-title">All products</h1>
+          <h1 data-testid="store-page-title">Technology collection</h1><p className="text-sm font-normal text-ui-fg-subtle mt-3">Explore robotics, education and industrial intelligence. Illustrative VND prices for demo checkout.</p>
         </div>
         <Suspense fallback={<SkeletonProductGrid />}>
           <PaginatedProducts

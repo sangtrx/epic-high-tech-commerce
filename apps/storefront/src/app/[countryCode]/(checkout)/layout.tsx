@@ -29,11 +29,12 @@ export default function CheckoutLayout({
             className="txt-compact-xlarge-plus text-ui-fg-subtle hover:text-ui-fg-base uppercase"
             data-testid="store-link"
           >
-            Medusa Store
+            EPIC Technology
           </LocalizedClientLink>
           <div className="flex-1 basis-0" />
         </nav>
       </div>
+      <p className="epic-checkout-notice">DEMO CHECKOUT · No real payment or delivery. Use fictional details only.</p>
       <div className="relative" data-testid="checkout-container">{children}</div>
       <div className="py-4 w-full flex items-center justify-center">
         <MedusaCTA />

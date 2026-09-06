@@ -4,6 +4,8 @@ import "styles/globals.css"
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
+  applicationName: "EPIC Technology",
+  description: "Advanced technology for Vietnam: robotics, education systems and industrial vision. EPIC Technology demo.",
 }
 
 export default function RootLayout(props: { children: React.ReactNode }) {

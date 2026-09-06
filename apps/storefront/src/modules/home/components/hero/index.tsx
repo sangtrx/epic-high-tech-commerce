@@ -1,31 +1,65 @@
-import { Github } from "@medusajs/icons";
-import { Button, Heading } from "@modules/common/components/ui";
-const Hero = () => {
-  return (
-    <div className="h-[75vh] w-full border-b border-ui-border-base relative bg-ui-bg-subtle">
-      <div className="absolute inset-0 z-10 flex flex-col justify-center items-center text-center small:p-32 gap-6">
-        <span>
-          <Heading
-            level="h1"
-            className="text-3xl leading-10 text-ui-fg-base font-normal"
-          >
-            Ecommerce Starter Template
-          </Heading>
-          <Heading
-            level="h2"
-            className="text-3xl leading-10 text-ui-fg-subtle font-normal"
-          >
-            Powered by Medusa and Next.js
-          </Heading>
-        </span>
-        <a href="https://github.com/medusajs/dtc-starter" target="_blank">
-          <Button variant="secondary">
-            View on GitHub <Github />
-          </Button>
-        </a>
-      </div>
-    </div>
-  );
-};
+import Image from "next/image"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
-export default Hero;
+export default function Hero() {
+  return (
+    <section className="epic-hero">
+      <div className="content-container epic-hero-grid">
+        <div className="epic-hero-copy">
+          <p className="epic-eyebrow">EPIC TECHNOLOGY / VIETNAM</p>
+          <h1>
+            Advanced technology.
+            <br />
+            <span>Real-world possibility.</span>
+          </h1>
+          <p className="epic-hero-description">
+            Robotics, intelligent classrooms and industrial vision. Explore a
+            considered selection of technology for the way Vietnam works, learns
+            and moves.
+          </p>
+          <div className="epic-hero-actions">
+            <LocalizedClientLink href="/store" className="epic-button">
+              Explore the collection <span aria-hidden="true">↗</span>
+            </LocalizedClientLink>
+            <LocalizedClientLink href="/showroom" className="epic-text-link">
+              Discover the showroom <span aria-hidden="true">→</span>
+            </LocalizedClientLink>
+          </div>
+          <p className="epic-hero-note">
+            Selection. Demonstration. Installation. Ongoing support.
+          </p>
+        </div>
+        <LocalizedClientLink
+          href="/products/serve-one"
+          className="epic-hero-visual"
+          aria-label="Explore Serve One Delivery Robot"
+        >
+          <div className="epic-visual-top">
+            <span>IN FOCUS / 01</span>
+            <span>SERVICE ROBOTICS</span>
+          </div>
+          <Image
+            src="/epic/serve-one.svg"
+            alt="Concept illustration of a three-tray indoor delivery robot"
+            width={720}
+            height={760}
+            priority
+            className="epic-hero-robot"
+          />
+          <div className="epic-visual-bottom">
+            <div>
+              <span className="epic-eyebrow">MEET SERVE ONE</span>
+              <h2>A new member of the team.</h2>
+            </div>
+            <span className="epic-circle-arrow" aria-hidden="true">
+              ↗
+            </span>
+          </div>
+          <span className="epic-image-caption">
+            Concept illustration · demo configuration
+          </span>
+        </LocalizedClientLink>
+      </div>
+    </section>
+  )
+}
