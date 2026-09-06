@@ -1,3 +1,5 @@
+import Image from "next/image"
+
 import { listCategories } from "@lib/data/categories"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
@@ -8,8 +10,23 @@ export default async function Footer() {
       <div className="content-container">
         <div className="epic-footer-grid">
           <div>
-            <LocalizedClientLink href="/" className="epic-wordmark">
-              EPIC<span>TECHNOLOGY</span>
+            <LocalizedClientLink
+              href="/"
+              className="inline-flex items-center gap-2 bg-white px-3 py-2"
+              aria-label="EPIC Technology home"
+            >
+              <span className="relative block h-12 w-[50px] shrink-0 overflow-hidden">
+                <Image
+                  src="/epic/epic-technology-logo.svg"
+                  width={140}
+                  height={48}
+                  className="h-12 w-auto max-w-none"
+                  alt=""
+                />
+              </span>
+              <span className="whitespace-nowrap text-[17px] font-bold tracking-[-0.04em] text-[#0b4f97]">
+                EPIC TECHNOLOGY
+              </span>
             </LocalizedClientLink>
             <p className="max-w-xs mt-6 text-sm leading-6 text-[#aeb7b2]">
               Advanced technology, thoughtfully introduced.
