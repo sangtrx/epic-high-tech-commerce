@@ -117,6 +117,18 @@ export default async function ShowroomPage() {
                   </dd>
                 </div>
                 <div>
+                  <dt className="opacity-60">Weight</dt>
+                  <dd>
+                    {product.weight_kg === null
+                      ? "To confirm"
+                      : `${product.weight_kg} kg`}
+                  </dd>
+                </div>
+                <div>
+                  <dt className="opacity-60">Dimensions</dt>
+                  <dd>{product.dimensions_mm ?? "To confirm"}</dd>
+                </div>
+                <div>
                   <dt className="opacity-60">Delivery</dt>
                   <dd>{deliveryLabels[product.delivery_class]}</dd>
                 </div>
@@ -125,8 +137,20 @@ export default async function ShowroomPage() {
                   <dd>{product.installation_required ? "Required" : "Not required"}</dd>
                 </div>
                 <div>
+                  <dt className="opacity-60">Serial tracking</dt>
+                  <dd>{product.serial_tracking_required ? "Required" : "Not required"}</dd>
+                </div>
+                <div>
                   <dt className="opacity-60">Manufacturer warranty</dt>
                   <dd>{formatWarranty(product.manufacturer_warranty_months)}</dd>
+                </div>
+                <div className="sm:col-span-2">
+                  <dt className="opacity-60">Power requirement</dt>
+                  <dd>{product.power_requirement ?? "To confirm"}</dd>
+                </div>
+                <div className="sm:col-span-2">
+                  <dt className="opacity-60">Network requirement</dt>
+                  <dd>{product.network_requirement ?? "To confirm"}</dd>
                 </div>
                 <div>
                   <dt className="opacity-60">Checkout</dt>
