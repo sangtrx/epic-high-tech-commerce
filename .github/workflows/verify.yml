@@ -12,6 +12,21 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_USER: epic_ci
+          POSTGRES_PASSWORD: epic_ci
+          POSTGRES_DB: epic_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U epic_ci -d epic_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 12
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -38,10 +53,45 @@ jobs:
       - name: Type-check storefront
         run: pnpm --filter @dtc/storefront exec tsc --noEmit
 
-      - name: Build storefront
+      - name: Prepare isolated Medusa build backend
         env:
-          NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: ${{ secrets.MEDUSA_PUBLISHABLE_KEY }}
-          NEXT_PUBLIC_MEDUSA_BACKEND_URL: ${{ secrets.MEDUSA_BACKEND_URL }}
+          DATABASE_URL: postgres://epic_ci:epic_ci@127.0.0.1:5432/epic_ci
+          JWT_SECRET: ci-jwt-secret-not-for-production
+          COOKIE_SECRET: ci-cookie-secret-not-for-production
+          STORE_CORS: http://127.0.0.1:8000
+          ADMIN_CORS: http://127.0.0.1:9000
+          AUTH_CORS: http://127.0.0.1:8000,http://127.0.0.1:9000
+          EPIC_STOREFRONT_URL: http://127.0.0.1:8000
+        run: |
+          pnpm --filter @dtc/backend exec medusa db:migrate
+
+          publishable_key="$(
+            docker run --rm --network host \
+              -e PGPASSWORD=epic_ci \
+              postgres:17 \
+              psql -h 127.0.0.1 -U epic_ci -d epic_ci -Atc \
+              "select token from api_key where type = 'publishable' and revoked_at is null order by created_at asc limit 1;"
+          )"
+          test -n "$publishable_key"
+          printf 'NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=%s\n' "$publishable_key" >> "$GITHUB_ENV"
+          printf 'NEXT_PUBLIC_MEDUSA_BACKEND_URL=http://127.0.0.1:9000\n' >> "$GITHUB_ENV"
+          printf 'NEXT_PUBLIC_DEFAULT_REGION=vn\n' >> "$GITHUB_ENV"
+          printf 'NEXT_PUBLIC_BASE_URL=http://127.0.0.1:8000\n' >> "$GITHUB_ENV"
+
+          nohup pnpm --filter @dtc/backend exec medusa develop --host 127.0.0.1 \
+            > /tmp/epic-medusa-ci.log 2>&1 &
+
+          for attempt in $(seq 1 90); do
+            if curl -fsS --max-time 2 http://127.0.0.1:9000/health >/dev/null; then
+              exit 0
+            fi
+            sleep 2
+          done
+
+          cat /tmp/epic-medusa-ci.log
+          exit 1
+
+      - name: Build storefront
         run: pnpm --filter @dtc/storefront build
 
       - name: Check whitespace
