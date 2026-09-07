@@ -39,6 +39,8 @@ jobs:
         run: pnpm --filter @dtc/storefront exec tsc --noEmit
 
       - name: Build storefront
+        env:
+          NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: pk_ci_build_only
         run: pnpm --filter @dtc/storefront build
 
       - name: Check whitespace
