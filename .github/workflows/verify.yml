@@ -40,7 +40,8 @@ jobs:
 
       - name: Build storefront
         env:
-          NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: pk_ci_build_only
+          NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY: ${{ secrets.MEDUSA_PUBLISHABLE_KEY }}
+          NEXT_PUBLIC_MEDUSA_BACKEND_URL: ${{ secrets.MEDUSA_BACKEND_URL }}
         run: pnpm --filter @dtc/storefront build
 
       - name: Check whitespace
