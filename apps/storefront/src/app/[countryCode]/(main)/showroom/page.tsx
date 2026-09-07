@@ -156,6 +156,13 @@ export default async function ShowroomPage() {
                 )}
               </div>
 
+              {product.demo_script && (
+                <div className="mt-5 border-t border-ui-border-base pt-5 text-sm">
+                  <p className="epic-eyebrow mb-2">30–60 SEC DEMO SCRIPT</p>
+                  <p>{product.demo_script}</p>
+                </div>
+              )}
+
               <a
                 href={product.public_source_url}
                 target="_blank"
@@ -180,7 +187,7 @@ export default async function ShowroomPage() {
             vision, prepare representative parts and inspection criteria.
           </p>
           <p className="mt-4">
-            This September 7 experience demonstrates the proposed showroom journey.
+            This showroom experience demonstrates the proposed customer journey.
             Physical visits, hardware availability, service areas and appointments
             are not confirmed or booked through this site. Installation, delivery
             and warranty terms require a written quotation.
