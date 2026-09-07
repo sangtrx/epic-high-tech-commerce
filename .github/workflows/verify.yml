@@ -1,0 +1,42 @@
+name: Verify
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Enable pnpm
+        run: |
+          corepack enable
+          corepack prepare pnpm@10.11.1 --activate
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify SAN-188 backend catalog consumers
+        run: pnpm --filter @dtc/backend test:unit -- launch-catalog.unit.spec.ts
+
+      - name: Type-check backend
+        run: pnpm --filter @dtc/backend exec tsc --noEmit
+
+      - name: Type-check storefront
+        run: pnpm --filter @dtc/storefront exec tsc --noEmit
+
+      - name: Check whitespace
+        run: git diff --check
