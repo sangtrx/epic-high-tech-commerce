@@ -1,5 +1,8 @@
+import { GET as getAdminLaunchCatalog } from "../../api/admin/custom/route"
+import { GET as getStoreLaunchCatalog } from "../../api/store/custom/route"
 import { epicCatalog } from "../../scripts/epic-catalog"
 import { launchCatalog } from "../launch-catalog"
+import { publicLaunchCatalog } from "../public-launch-catalog"
 
 const quoteOwnedFields = [
   "supplier_quote_date",
@@ -15,6 +18,20 @@ const quoteOwnedFields = [
   "showroom_qty",
   "lead_time_days",
   "manufacturer_warranty_months",
+  "spare_parts_notes",
+] as const
+
+const privateStoreFields = [
+  "supplier_contact",
+  "supplier_quote_date",
+  "supplier_currency",
+  "supplier_unit_cost",
+  "estimated_freight",
+  "estimated_import_cost",
+  "landed_cost_vnd",
+  "discount_owner",
+  "stock_qty",
+  "showroom_qty",
   "spare_parts_notes",
 ] as const
 
@@ -116,5 +133,44 @@ describe("SAN-188 launch catalog", () => {
       expect(product.delivery_class).toBe("P3")
       expect(product.installation_required).toBe(true)
     }
+  })
+
+  it("serves a public-safe projection of the shared record to storefront consumers", async () => {
+    const json = jest.fn()
+    const response = { json } as unknown as Parameters<typeof getStoreLaunchCatalog>[1]
+
+    await getStoreLaunchCatalog(
+      {} as Parameters<typeof getStoreLaunchCatalog>[0],
+      response
+    )
+
+    expect(json).toHaveBeenCalledWith({ launch_catalog: publicLaunchCatalog })
+    expect(publicLaunchCatalog).toHaveLength(launchCatalog.length)
+    expect(publicLaunchCatalog.map((product) => product.sku)).toEqual(
+      launchCatalog.map((product) => product.sku)
+    )
+
+    for (const product of publicLaunchCatalog) {
+      expect(product.checkout_enabled).toBe(false)
+      expect(["in-stock", "showroom-demo", "quote-required"]).toContain(
+        product.availability_status
+      )
+
+      for (const privateField of privateStoreFields) {
+        expect(Object.keys(product)).not.toContain(privateField)
+      }
+    }
+  })
+
+  it("serves the canonical full record to authenticated admin consumers", async () => {
+    const json = jest.fn()
+    const response = { json } as unknown as Parameters<typeof getAdminLaunchCatalog>[1]
+
+    await getAdminLaunchCatalog(
+      {} as Parameters<typeof getAdminLaunchCatalog>[0],
+      response
+    )
+
+    expect(json).toHaveBeenCalledWith({ launch_catalog: launchCatalog })
   })
 })
