@@ -113,13 +113,14 @@ describe("SAN-188 launch catalog", () => {
     }
   })
 
-  it("keeps unapproved media and supplier-rights fields empty", () => {
+  it("keeps vendor-rights media empty while requiring EPIC-owned demo copy", () => {
     for (const product of launchCatalog) {
       expect(product.hero_image).toBeNull()
       expect(product.gallery).toEqual([])
       expect(product.datasheet_url).toBeNull()
       expect(product.manual_url).toBeNull()
-      expect(product.demo_script).toBeNull()
+      expect(product.demo_script).not.toBeNull()
+      expect(product.demo_script?.length).toBeGreaterThan(300)
     }
   })
 
@@ -149,9 +150,13 @@ describe("SAN-188 launch catalog", () => {
     expect(publicLaunchCatalog.map((product) => product.sku)).toEqual(
       launchCatalog.map((product) => product.sku)
     )
+    expect(publicLaunchCatalog.map((product) => product.demo_script)).toEqual(
+      launchCatalog.map((product) => product.demo_script)
+    )
 
     for (const product of publicLaunchCatalog) {
       expect(product.checkout_enabled).toBe(false)
+      expect(product.demo_script).not.toBeNull()
       expect(["in-stock", "showroom-demo", "quote-required"]).toContain(
         product.availability_status
       )
