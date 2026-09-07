@@ -1,8 +1,9 @@
-import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
+import { MedusaRequest, MedusaResponse } from "@medusajs/framework/http"
+import { launchCatalog } from "../../../catalog/launch-catalog"
 
 export async function GET(
-  req: MedusaRequest,
+  _req: MedusaRequest,
   res: MedusaResponse
 ) {
-  res.sendStatus(200);
+  res.json({ launch_catalog: launchCatalog })
 }
