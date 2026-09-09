@@ -27,14 +27,12 @@ export default async function ProductRail({
   }
 
   return (
-    <div className="content-container py-12 small:py-20">
-      <div className="flex justify-between mb-8">
+    <div className="content-container epic-product-rail">
+      <div className="epic-product-rail-head">
         <div>
-          <p className="epic-eyebrow mb-3">CURATED FOR POSSIBILITY</p>
-          <Heading level="h2" className="text-3xl font-medium tracking-tight">
-            {collection.title}
-          </Heading>
-          <p className="text-sm text-ui-fg-subtle mt-3">
+          <p className="epic-eyebrow">CURATED FOR POSSIBILITY</p>
+          <Heading level="h2">{collection.title}</Heading>
+          <p className="mt-3">
             Four starting points. One connected approach to technology.
           </p>
         </div>
@@ -42,7 +40,7 @@ export default async function ProductRail({
           View collection
         </InteractiveLink>
       </div>
-      <ul className="grid grid-cols-1 xsmall:grid-cols-2 small:grid-cols-4 gap-6">
+      <ul className="epic-product-grid grid grid-cols-1 xsmall:grid-cols-2 small:grid-cols-4">
         {pricedProducts &&
           pricedProducts.map((product) => (
             <li key={product.id}>

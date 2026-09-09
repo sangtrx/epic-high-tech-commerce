@@ -1,0 +1,782 @@
+/* SAN-285 — EPIC Technology storefront redesign
+ * A presentation layer intentionally isolated from Medusa commerce primitives.
+ */
+
+:root {
+  --epic-ink: #07131d;
+  --epic-ink-soft: #102331;
+  --epic-blue: #0b4f97;
+  --epic-electric: #1568c3;
+  --epic-green: #16a765;
+  --epic-paper: #f4f1e9;
+  --epic-paper-bright: #fbfaf6;
+  --epic-line: rgba(7, 19, 29, 0.14);
+  --epic-muted: #66727b;
+}
+
+body {
+  background: var(--epic-paper-bright);
+  color: var(--epic-ink);
+  font-family: "Avenir Next", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+::selection {
+  background: var(--epic-green);
+  color: #06120d;
+}
+
+.content-container {
+  max-width: 1540px;
+}
+
+.epic-announcement {
+  min-height: 30px;
+  background: var(--epic-green);
+  color: #06120d;
+  font-weight: 700;
+  letter-spacing: 0.13em;
+  border: 0;
+}
+
+.epic-nav-shell {
+  height: 82px;
+  background: rgba(251, 250, 246, 0.96);
+  border-color: var(--epic-line);
+  backdrop-filter: blur(18px);
+}
+
+.epic-nav {
+  color: #33424c;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.epic-nav a {
+  transition: color 180ms ease, opacity 180ms ease;
+}
+
+.epic-nav a:hover {
+  color: var(--epic-blue);
+}
+
+.epic-brand-lockup {
+  position: relative;
+  padding: 0 18px;
+}
+
+.epic-brand-lockup::before,
+.epic-brand-lockup::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 44px;
+  height: 1px;
+  background: rgba(7, 19, 29, 0.16);
+}
+
+.epic-brand-lockup::before {
+  right: 100%;
+}
+
+.epic-brand-lockup::after {
+  left: 100%;
+}
+
+.epic-brand-name {
+  color: var(--epic-blue);
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.045em;
+}
+
+.epic-eyebrow {
+  color: inherit;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.epic-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--epic-ink);
+  color: #f8f6ef;
+  border: 0;
+}
+
+.epic-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.22;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to right, #000 0%, transparent 72%);
+}
+
+.epic-hero::after {
+  content: "EPIC / 2026";
+  position: absolute;
+  right: -38px;
+  bottom: 44%;
+  transform: rotate(90deg);
+  color: rgba(255, 255, 255, 0.33);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+}
+
+.epic-hero-grid {
+  grid-template-columns: minmax(0, 0.9fr) minmax(480px, 1.1fr);
+  gap: clamp(38px, 5vw, 90px);
+  align-items: stretch;
+  min-height: min(760px, calc(100vh - 112px));
+  padding-top: clamp(36px, 5vw, 72px);
+  padding-bottom: clamp(36px, 5vw, 72px);
+}
+
+.epic-hero-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 0 0 18px;
+}
+
+.epic-hero-copy > .epic-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: #8fbbdd;
+}
+
+.epic-hero-copy > .epic-eyebrow::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background: var(--epic-green);
+}
+
+.epic-hero h1 {
+  max-width: 760px;
+  margin: 34px 0 30px;
+  color: #f8f6ef;
+  font-size: clamp(52px, 6vw, 96px);
+  font-weight: 500;
+  line-height: 0.92;
+  letter-spacing: -0.065em;
+  text-wrap: balance;
+}
+
+.epic-hero h1 span {
+  display: block;
+  color: #7bb7e7;
+  font-weight: 400;
+}
+
+.epic-hero-description {
+  max-width: 560px;
+  color: #aebbc4;
+  font-size: clamp(15px, 1.3vw, 19px);
+  line-height: 1.65;
+}
+
+.epic-hero-actions {
+  margin-top: 38px;
+  gap: 28px;
+}
+
+.epic-button {
+  min-height: 54px;
+  padding: 16px 20px;
+  background: var(--epic-green);
+  color: #06120d;
+  border: 1px solid var(--epic-green);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
+}
+
+.epic-button:hover {
+  background: #f8f6ef;
+  color: var(--epic-ink);
+  transform: translateY(-2px);
+}
+
+.epic-text-link {
+  border-color: rgba(255, 255, 255, 0.38);
+  color: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.epic-hero-note {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 52px;
+  color: #718490;
+  font-size: 9px;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.epic-hero-note::before {
+  content: "";
+  width: 30px;
+  height: 1px;
+  background: #718490;
+}
+
+.epic-hero-visual {
+  position: relative;
+  min-height: 620px;
+  background: #dce8ef;
+  border: 0;
+  box-shadow: 18px 18px 0 var(--epic-blue);
+  color: var(--epic-ink);
+}
+
+.epic-hero-visual::before {
+  content: "";
+  position: absolute;
+  inset: 16px;
+  border: 1px solid rgba(7, 19, 29, 0.17);
+  pointer-events: none;
+}
+
+.epic-visual-top {
+  top: 30px;
+  left: 32px;
+  right: 32px;
+  z-index: 2;
+  font-size: 8px;
+  letter-spacing: 0.18em;
+}
+
+.epic-hero-robot {
+  position: relative;
+  z-index: 1;
+  width: 88%;
+  height: 90%;
+  margin: 4% auto 0;
+  object-fit: contain;
+  transform: scale(1.03) translateY(-1%);
+  mix-blend-mode: multiply;
+  filter: contrast(1.04);
+  transition: transform 480ms cubic-bezier(0.2, 0.75, 0.2, 1);
+}
+
+.epic-hero-visual:hover .epic-hero-robot {
+  transform: scale(1.07) translateY(-2%);
+}
+
+.epic-visual-bottom {
+  z-index: 2;
+  bottom: 52px;
+  left: 32px;
+  right: 32px;
+}
+
+.epic-visual-bottom h2 {
+  max-width: 420px;
+  margin-top: 7px;
+  font-size: clamp(20px, 2vw, 30px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+}
+
+.epic-circle-arrow {
+  width: 48px;
+  height: 48px;
+  background: var(--epic-ink);
+  border: 0;
+  border-radius: 0;
+  color: #fff;
+}
+
+.epic-image-caption {
+  bottom: 24px;
+  left: 32px;
+  color: #455a67;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.epic-solutions {
+  grid-template-columns: repeat(4, 1fr);
+  padding-top: 0;
+  padding-bottom: 0;
+  background: var(--epic-paper-bright);
+  border-bottom: 1px solid var(--epic-line);
+}
+
+.epic-solution {
+  min-height: 210px;
+  padding: 34px 30px 30px;
+  border-right: 1px solid var(--epic-line);
+  transition: background 180ms ease, color 180ms ease;
+}
+
+.epic-solution:first-child {
+  padding-left: 18px;
+}
+
+.epic-solution .epic-eyebrow {
+  color: #82909a;
+}
+
+.epic-solution h2 {
+  align-items: flex-end;
+  margin: 50px 0 12px;
+  color: var(--epic-ink);
+  font-size: clamp(16px, 1.35vw, 21px);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+}
+
+.epic-solution h2 span {
+  color: var(--epic-blue);
+  font-size: 13px;
+}
+
+.epic-solution p {
+  color: var(--epic-muted);
+  font-size: 11px;
+  line-height: 1.7;
+}
+
+.epic-solution:hover {
+  background: var(--epic-blue);
+}
+
+.epic-solution:hover .epic-eyebrow,
+.epic-solution:hover h2,
+.epic-solution:hover h2 span,
+.epic-solution:hover p {
+  color: #fff;
+}
+
+.epic-collection {
+  background: var(--epic-paper);
+  border: 0;
+}
+
+.epic-product-rail {
+  padding-top: clamp(70px, 7vw, 112px);
+  padding-bottom: clamp(70px, 7vw, 112px);
+}
+
+.epic-product-rail-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 32px;
+  margin-bottom: 40px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--epic-line);
+}
+
+.epic-product-rail-head h2 {
+  margin-top: 10px;
+  color: var(--epic-ink);
+  font-size: clamp(34px, 4vw, 58px);
+  font-weight: 500;
+  line-height: 0.98;
+  letter-spacing: -0.055em;
+}
+
+.epic-product-rail-head p:not(.epic-eyebrow) {
+  color: var(--epic-muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.epic-product-grid {
+  gap: clamp(14px, 1.7vw, 28px);
+}
+
+.epic-product-grid > li {
+  min-width: 0;
+}
+
+.epic-product-card,
+.epic-product-grid a {
+  color: var(--epic-ink);
+}
+
+.epic-product-card img,
+.epic-product-grid img {
+  transition: transform 420ms cubic-bezier(0.2, 0.75, 0.2, 1), filter 220ms ease;
+}
+
+.epic-product-card:hover img,
+.epic-product-grid a:hover img {
+  transform: scale(1.025);
+  filter: contrast(1.04);
+}
+
+.epic-services {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(84px, 9vw, 148px) 0;
+  background: var(--epic-blue);
+  color: #fff;
+}
+
+.epic-services::after {
+  content: "FIELD NOTES / EPIC";
+  position: absolute;
+  right: 2vw;
+  top: 42px;
+  color: rgba(255, 255, 255, 0.4);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+}
+
+.epic-services-grid {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+  gap: 11%;
+  padding-left: 42px;
+  padding-right: 42px;
+}
+
+.epic-services .epic-eyebrow {
+  color: #9cc8eb;
+}
+
+.epic-services h2 {
+  max-width: 570px;
+  margin: 28px 0 28px;
+  color: #fff;
+  font-size: clamp(42px, 5.2vw, 76px);
+  font-weight: 500;
+  line-height: 0.95;
+  letter-spacing: -0.06em;
+}
+
+.epic-services p:not(.epic-eyebrow) {
+  color: #c6dcec;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.epic-services .epic-text-link {
+  margin-top: 34px;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.epic-service-steps {
+  border-top: 1px solid rgba(255, 255, 255, 0.32);
+}
+
+.epic-service-steps li {
+  gap: 28px;
+  padding: 27px 0;
+  border-color: rgba(255, 255, 255, 0.22);
+}
+
+.epic-service-steps li:first-child {
+  padding-top: 27px;
+}
+
+.epic-service-steps li > span {
+  color: #78b4df;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.epic-service-steps h3 {
+  margin-bottom: 8px;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+}
+
+.epic-service-steps p {
+  color: #c6dcec !important;
+}
+
+.epic-footer {
+  background: var(--epic-ink);
+  color: #f7f4ed;
+}
+
+.epic-footer-grid {
+  grid-template-columns: 1.55fr 0.75fr 0.75fr;
+  gap: clamp(34px, 6vw, 94px);
+  padding: 78px 18px 72px;
+}
+
+.epic-footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  width: fit-content;
+  padding: 10px 14px;
+  background: #fff;
+}
+
+.epic-footer-tagline {
+  max-width: 420px;
+  margin-top: 26px;
+  color: #8ea0ac;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.epic-footer h2 {
+  margin-bottom: 22px;
+  color: #6f8797;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.epic-footer li {
+  margin-top: 13px;
+  color: #c6cfd5;
+  font-size: 12px;
+}
+
+.epic-footer a:hover {
+  color: #fff;
+}
+
+.epic-footer-bottom {
+  padding: 25px 18px 30px;
+  border-color: rgba(255, 255, 255, 0.12);
+  color: #738692;
+  font-size: 9px;
+  letter-spacing: 0.04em;
+}
+
+@media (max-width: 1100px) {
+  .epic-brand-lockup::before,
+  .epic-brand-lockup::after {
+    display: none;
+  }
+
+  .epic-hero-grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(410px, 1.1fr);
+    gap: 30px;
+  }
+
+  .epic-hero h1 {
+    font-size: clamp(48px, 5.8vw, 72px);
+  }
+}
+
+@media (max-width: 900px) {
+  .epic-hero-grid {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .epic-hero-copy {
+    max-width: 760px;
+    padding: 40px 0 20px;
+  }
+
+  .epic-hero-visual {
+    min-height: 580px;
+    box-shadow: 12px 12px 0 var(--epic-blue);
+  }
+
+  .epic-solutions {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .epic-solution {
+    min-height: 190px;
+    border-bottom: 1px solid var(--epic-line);
+  }
+
+  .epic-solution:nth-child(2) {
+    border-right: 0;
+  }
+
+  .epic-services-grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 639px) {
+  .content-container {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .epic-announcement {
+    min-height: 28px;
+    padding: 6px 10px;
+    font-size: 7px;
+    line-height: 1.35;
+  }
+
+  .epic-nav-shell {
+    height: 68px;
+  }
+
+  .epic-brand-lockup {
+    padding: 0;
+  }
+
+  .epic-brand-name {
+    display: none;
+  }
+
+  .epic-hero::after {
+    display: none;
+  }
+
+  .epic-hero-grid {
+    padding-top: 0;
+    padding-bottom: 42px;
+  }
+
+  .epic-hero-copy {
+    padding: 42px 0 16px;
+  }
+
+  .epic-hero h1 {
+    margin: 25px 0 24px;
+    font-size: clamp(50px, 15.4vw, 68px);
+    line-height: 0.93;
+  }
+
+  .epic-hero-description {
+    font-size: 14px;
+  }
+
+  .epic-hero-actions {
+    align-items: flex-start;
+    margin-top: 30px;
+  }
+
+  .epic-button {
+    width: 100%;
+  }
+
+  .epic-hero-note {
+    margin-top: 34px;
+    line-height: 1.6;
+  }
+
+  .epic-hero-visual {
+    height: 470px;
+    min-height: 0;
+    box-shadow: 8px 8px 0 var(--epic-blue);
+  }
+
+  .epic-visual-top {
+    top: 25px;
+    left: 24px;
+    right: 24px;
+  }
+
+  .epic-visual-bottom {
+    bottom: 48px;
+    left: 24px;
+    right: 24px;
+  }
+
+  .epic-image-caption {
+    left: 24px;
+  }
+
+  .epic-solutions {
+    grid-template-columns: 1fr;
+  }
+
+  .epic-solution,
+  .epic-solution:first-child,
+  .epic-solution:nth-child(3) {
+    min-height: 150px;
+    padding: 24px 0;
+    border-right: 0;
+  }
+
+  .epic-solution h2 {
+    margin-top: 28px;
+    font-size: 19px;
+  }
+
+  .epic-product-rail {
+    padding-top: 62px;
+    padding-bottom: 62px;
+  }
+
+  .epic-product-rail-head {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+
+  .epic-product-rail-head h2 {
+    font-size: 42px;
+  }
+
+  .epic-services {
+    padding: 76px 0;
+  }
+
+  .epic-services-grid {
+    gap: 48px;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .epic-services h2 {
+    font-size: 48px;
+  }
+
+  .epic-footer-grid {
+    grid-template-columns: 1fr 1fr;
+    padding: 58px 0;
+  }
+
+  .epic-footer-grid > div:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .epic-footer-bottom {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .epic-button,
+  .epic-solution,
+  .epic-hero-robot,
+  .epic-product-card img,
+  .epic-product-grid img {
+    transition: none !important;
+  }
+
+  .epic-button:hover,
+  .epic-hero-visual:hover .epic-hero-robot,
+  .epic-product-card:hover img,
+  .epic-product-grid a:hover img {
+    transform: none !important;
+  }
+}
