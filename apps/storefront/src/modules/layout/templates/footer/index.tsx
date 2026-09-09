@@ -12,7 +12,7 @@ export default async function Footer() {
           <div>
             <LocalizedClientLink
               href="/"
-              className="inline-flex items-center gap-2 bg-white px-3 py-2"
+              className="epic-footer-brand"
               aria-label="EPIC Technology home"
             >
               <span className="relative block h-12 w-[50px] shrink-0 overflow-hidden">
@@ -24,11 +24,11 @@ export default async function Footer() {
                   alt=""
                 />
               </span>
-              <span className="whitespace-nowrap text-[17px] font-bold tracking-[-0.04em] text-[#0b4f97]">
+              <span className="epic-brand-name whitespace-nowrap">
                 EPIC TECHNOLOGY
               </span>
             </LocalizedClientLink>
-            <p className="max-w-xs mt-6 text-sm leading-6 text-[#aeb7b2]">
+            <p className="epic-footer-tagline">
               Advanced technology, thoughtfully introduced.
               <br />A distribution and showroom concept for Vietnam.
             </p>
